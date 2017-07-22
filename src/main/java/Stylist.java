@@ -1,8 +1,13 @@
+import org.sql2o.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Stylist {
   private String name;
   private String expertise;
+  private int id;
 
-  public Stylist() {
+  public Stylist(String name, String expertise) {
     this.name = name;
     this.expertise = expertise;
   }
@@ -22,7 +27,25 @@ public class Stylist {
     } else {
       Stylist newStylist = (Stylist) otherStylist;
       return this.getName().equals(newStylist.getName()) &&
-             this.getEmail().equals(newStylist.getExpertise());
+             this.getExpertise().equals(newStylist.getExpertise());
     }
   }
+
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO stylists (name, expertise) VALUES (:name, :expertise)";
+      con.createQuery(sql)
+        .addParameter("name", this.name)
+        .addParameter("expertise", this.expertise)
+        .executeUpdate();
+    }
+  }
+
+  public static List<Stylist> all() {
+    String sql = "SELECT * FROM stylists";
+    try(Connection con = DB.sql2o.open()) {
+     return con.createQuery(sql).executeAndFetch(Stylist.class);
+    }
+  }
+
 }

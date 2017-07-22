@@ -4,6 +4,9 @@ import org.sql2o.*;
 
 public class StylistTest {
 
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
+
   @Test
   public void stylist_instantiatesCorrectly_true() {
     Stylist testStylist = new Stylist("Henry", "Brazilian Blowout");
@@ -19,7 +22,7 @@ public class StylistTest {
   @Test
   public void getEmail_stylistInstantiatesWithExpertise_String() {
     Stylist testStylist = new Stylist("Henry", "Brazilian Blowout");
-    assertEquals("henry@henry.com", testStylist.getExpertise());
+    assertEquals("Brazilian Blowout", testStylist.getExpertise());
   }
 
   @Test
@@ -34,6 +37,16 @@ public class StylistTest {
     Stylist testStylist = new Stylist("Henry", "Brazilian Blowout");
     testStylist.save();
     assertTrue(Stylist.all().get(0).equals(testStylist));
+  }
+
+  @Test
+  public void all_returnsAllInstancesOfStylist_true() {
+    Stylist firstStylist = new Stylist("Henry", "Brazilian Blowout");
+    firstStylist.save();
+    Stylist secondStylist = new Stylist("Harriet", "Precision Haircuts");
+    secondStylist.save();
+    assertEquals(true, Stylist.all().get(0).equals(firstStylist));
+    assertEquals(true, Stylist.all().get(1).equals(secondStylist));
   }
 
 }
