@@ -8,7 +8,7 @@ public class ClientTest {
   public DatabaseRule database = new DatabaseRule();
 
   @Test
-  public void monster_instantiatesCorrectly_true() {
+  public void client_instantiatesCorrectly_true() {
     Client testClient = new Client("Vain Valerie", "206-XXX-XXXX", 1);
     assertEquals(true, testClient instanceof Client);
   }
