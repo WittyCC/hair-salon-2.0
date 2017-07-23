@@ -70,4 +70,24 @@ public class Client {
       return client;
     }
   }
+
+  public void update(String name, String contactInfo) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE clients SET name = :name, contactinfo = :contactinfo WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("name", name)
+        .addParameter("contactinfo", contactInfo)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+    String sql = "DELETE FROM clients WHERE id = :id;";
+    con.createQuery(sql)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
 }
