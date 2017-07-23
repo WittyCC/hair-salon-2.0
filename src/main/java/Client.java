@@ -62,10 +62,10 @@ public class Client {
   public static Client find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM clients where id=:id";
-      Client monster = con.createQuery(sql)
+      Client client = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Client.class);
-      return monster;
+      return client;
     }
   }
 
