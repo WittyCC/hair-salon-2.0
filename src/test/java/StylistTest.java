@@ -20,7 +20,7 @@ public class StylistTest {
   }
 
   @Test
-  public void getEmail_stylistInstantiatesWithExpertise_String() {
+  public void getExpertise_stylistInstantiatesWithExpertise_String() {
     Stylist testStylist = new Stylist("Henry", "Brazilian Blowout");
     assertEquals("Brazilian Blowout", testStylist.getExpertise());
   }
@@ -47,6 +47,23 @@ public class StylistTest {
     secondStylist.save();
     assertEquals(true, Stylist.all().get(0).equals(firstStylist));
     assertEquals(true, Stylist.all().get(1).equals(secondStylist));
+  }
+
+  @Test
+  public void save_assignsIdToObject() {
+    Stylist testStylist = new Stylist("Henry", "Brazilian Blowout");
+    testStylist.save();
+    Stylist savedStylist = Stylist.all().get(0);
+    assertEquals(testStylist.getId(), savedStylist.getId());
+  }
+
+  @Test
+  public void find_returnsStylistWithSameId_secondStylist() {
+    Stylist firstStylist = new Stylist("Henry", "Brazilian Blowout");
+    firstStylist.save();
+    Stylist secondStylist = new Stylist("Harriet", "Precision Haircuts");
+    secondStylist.save();
+    assertEquals(Stylist.find(secondStylist.getId()), secondStylist);
   }
 
 }
