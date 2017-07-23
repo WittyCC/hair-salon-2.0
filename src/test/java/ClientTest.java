@@ -38,4 +38,33 @@ public class ClientTest {
     testClient.save();
     assertTrue(Client.all().get(0).equals(testClient));
   }
+
+  @Test
+  public void all_returnsAllInstancesOfClient_true() {
+    Client firstClient = new Client("Vain Valerie", "206-XXX-XXXX", 1);
+    firstClient.save();
+    Client secondClient = new Client("Narcissistic Nate", "206-XXX-XXXX", 1);
+    secondClient.save();
+    assertEquals(true, Client.all().get(0).equals(firstClient));
+    assertEquals(true, Client.all().get(1).equals(secondClient));
+  }
+
+  @Test
+  public void find_returnsClientWithSameId_secondClient() {
+    Client firstClient = new Client("Vain Valerie", "206-XXX-XXXX", 1);
+    firstClient.save();
+    Client secondClient = new Client("Narcissistic Nate", "206-XXX-XXXX", 7);
+    secondClient.save();
+    assertEquals(Client.find(secondClient.getId()), secondClient);
+  }
+
+  @Test
+  public void save_savesStylistIdIntoDB_true() {
+    Stylist testStylist = new Stylist("Henry", "henry@henry.com");
+    testStylist.save();
+    Client testClient = new Client("Bubbles", testStylist.getId());
+    testClient.save();
+    Client savedClient = Client.find(testClient.getId());
+    assertEquals(savedClient.getStylistId(), testStylist.getId());
+  }
 }
