@@ -1,7 +1,6 @@
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.sql2o.*;
-import java.util.Arrays;
 
 public class ClientTest {
 
@@ -17,7 +16,7 @@ public class ClientTest {
   @Test
   public void Client_instantiatesWithName_String() {
     Client testClient = new Client("Vain Valerie", "206-XXX-XXXX", 1);
-    assertEquals("Bubbles", testClient.getName());
+    assertEquals("Vain Valerie", testClient.getName());
   }
 
   @Test
@@ -67,17 +66,5 @@ public class ClientTest {
     testClient.save();
     Client savedClient = Client.find(testClient.getId());
     assertEquals(savedClient.getStylistId(), testStylist.getId());
-  }
-
-  @Test
-  public void getClients_retrievesAllClientsFromDatabase_clientsList() {
-    Stylist testStylist = new Stylist("Henry", "Brazilian Blowouts");
-    testStylist.save();
-    Client firstClient = new Client("Vain Valerie", "206-XXX-XXXX", testStylist.getId());
-    firstClient.save();
-    Client secondClient = new Client("Narcissistic Nate", "206-XXX-XXXX", testStylist.getId());
-    secondClient.save();
-    Client[] clients = new Client[] { firstClient, secondClient };
-    assertTrue(testStylist.getClients().containsAll(Arrays.asList(clients)));
   }
 }

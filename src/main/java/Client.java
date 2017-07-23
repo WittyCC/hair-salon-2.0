@@ -1,6 +1,7 @@
 import org.sql2o.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 public class Client {
   private String name;
@@ -26,11 +27,12 @@ public class Client {
     return stylistId;
   }
 
-  public int getId(){
+  public int getId() {
     return id;
+  }
 
   @Override
-  public boolean equals(Object otherClient){
+  public boolean equals(Object otherClient) {
     if (!(otherClient instanceof Client)) {
       return false;
     } else {
@@ -42,11 +44,11 @@ public class Client {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO clients (name, contactinfo, stylistid) VALUES (:name, :contactinfo, :stylistId)";
+      String sql = "INSERT INTO clients (name, contactinfo, stylistid) VALUES (:name, :contactinfo, :stylistid)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
-        .addParameter("contactInfo", this.contactInfo)
-        .addParameter("stylistId", this.stylistId)
+        .addParameter("contactinfo", this.contactInfo)
+        .addParameter("stylistid", this.stylistId)
         .executeUpdate()
         .getKey();
     }
@@ -66,15 +68,6 @@ public class Client {
         .addParameter("id", id)
         .executeAndFetchFirst(Client.class);
       return client;
-    }
-  }
-
-  public List<Client> getClients() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM clients where stylistId=:id";
-      return con.createQuery(sql)
-        .addParameter("id", this.id)
-        .executeAndFetch(Client.class);
     }
   }
 }

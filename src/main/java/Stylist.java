@@ -1,6 +1,7 @@
 import org.sql2o.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 public class Stylist {
   private String name;
@@ -47,7 +48,7 @@ public class Stylist {
   }
 
   public static List<Stylist> all() {
-    String sql = "SELECT * FROM stylists";
+    String sql = "SELECT id, name, expertise FROM stylists";
     try(Connection con = DB.sql2o.open()) {
      return con.createQuery(sql).executeAndFetch(Stylist.class);
     }
@@ -63,4 +64,12 @@ public class Stylist {
     }
   }
 
+  public List<Client> getClients() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM clients where stylistid=:id";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Client.class);
+    }
+  }
 }
