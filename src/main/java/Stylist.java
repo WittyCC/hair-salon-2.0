@@ -7,6 +7,7 @@ public class Stylist {
   private String name;
   private String expertise;
   private int id;
+  private List<Client> Clients;
 
   public Stylist(String name, String expertise) {
     this.name = name;
@@ -72,4 +73,8 @@ public class Stylist {
         .executeAndFetch(Client.class);
     }
   }
+
+  // public void addClient(Client client) {
+  //   Clients.add(client);
+  // }
 }
