@@ -70,7 +70,7 @@ hair-salon
 You will need [gradle](https://gradle.org/gradle-download/) and PostgreSQL installed on your device.
 
 Enter the following commands in your terminal:
-* `$ git clone https://github.com/wcchang1382/hair-salon`;
+* `$ git clone https://github.com/wcchang1382/hair-salon-2.0`;
 * In a new terminal window, `$ postgres` to start the PostgreSQL server;
 * In another terminal window, `$ psql` to launch PSQL.
 
