@@ -33,6 +33,8 @@ This is a program that allows a hair salon manager to execute various tasks rela
 hair-salon
     ├── README.md
     ├── build.gradle
+    ├── database.sql
+    ├── schema.png
     ├── .gitignore
     └── src
          ├── main
@@ -46,19 +48,20 @@ hair-salon
          │             ├── public
          |             |      └── app.css
          │             └── templates
-         │                    ├── client-form.vtl
-         │                    ├── client-update.vtl
-         │                    ├── clients.vtl
+         │                    ├── client.vtl
          │                    ├── index.vtl
          │                    ├── layout.vtl
-         │                    ├── new-client.vtl
+         │                    ├── stylist-clients-form.vtl
+         │                    ├── stylist-clients-success.vtl
+         │                    ├── stylist-delete-success.vtl
          │                    ├── stylist-form.vtl
-         │                    ├── stylist-update.vtl
+         │                    ├── stylist-success.vtl
          │                    ├── stylist.vtl
          │                    └── stylists.vtl
          └── test
                └── java
                      ├── ClientTest.java
+                     ├── DatabaseRule.java
                      └── StylistTest.java
 ```
 
@@ -69,13 +72,16 @@ You will need [gradle](https://gradle.org/gradle-download/) and PostgreSQL insta
 Enter the following commands in your terminal:
 * `$ git clone https://github.com/wcchang1382/hair-salon`;
 * In a new terminal window, `$ postgres` to start the PostgreSQL server;
-* `gradle run` to run the application;
-* Navigate to `localhost:4567` in a web browser of your choice.
+* In another terminal window, `$ psql` to launch PSQL.
 
 In PSQL:
 * `CREATE DATABASE hair_salon;`
-* `CREATE TABLE stylists (id serial PRIMARY KEY, name varchar, expertise varchar);`
-* `CREATE TABLE clients (id serial PRIMARY KEY, name varchar, contact varchar, stylistid int);`
+
+In your terminal:
+* `psql hair_salon < database.sql;`
+* `gradle run` to run the application;
+* Navigate to `localhost:4567` in a web browser of your choice.
+
 
 ## Support and contact details
 
