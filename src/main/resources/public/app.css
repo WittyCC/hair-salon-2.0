@@ -2,7 +2,7 @@ body {
   background: url('http://wallpapercave.com/wp/MrsUPiW.jpg') no-repeat top right fixed;
   font-family: 'Coustard', serif;
   font-size: 50px;
-  color: white;
+  color: SaddleBrown;
 }
 
 h1 {
@@ -10,9 +10,9 @@ h1 {
 }
 
 input, textarea {
-  background-color: black;
+  background-color: Moccasin;
 }
 
 label {
-  font-size: 35px;
+  font-size: 30px;
 }
