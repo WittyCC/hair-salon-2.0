@@ -78,9 +78,9 @@ In PSQL:
 * `CREATE DATABASE hair_salon;`
 
 In your terminal:
-* `psql hair_salon < database.sql;`
-* `gradle run` to run the application;
-* Navigate to `localhost:4567` in a web browser of your choice.
+* `$ psql hair_salon < database.sql;`
+* `$ gradle run` to run the application;
+* Navigate to http://localhost:4567 in a web browser of your choice.
 
 
 ## Support and contact details
