@@ -36,6 +36,7 @@ public class ClientTest {
   public void save_returnsTrueIfDescriptionsAretheSame() {
     Client testClient = new Client("Vain Valerie", "206-XXX-XXXX", 1);
     testClient.save();
+    System.out.println(testClient);
     assertTrue(Client.all().get(0).equals(testClient));
   }
 
